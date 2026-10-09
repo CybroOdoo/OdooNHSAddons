@@ -314,7 +314,7 @@ class NhsComplaint(models.Model):
 
     @api.depends(
         'duty_of_candour_flag', 'linked_incident_ids',
-        'linked_incident_ids.doc_id', 'linked_incident_ids.doc_state',
+        'linked_incident_ids.doc_id', 'linked_incident_ids.doc_id.state',
     )
     def _compute_doc_warning(self):
         state_labels = {'open': 'Open', 'overdue': 'Overdue', 'complete': 'Complete'}
@@ -333,7 +333,7 @@ class NhsComplaint(models.Model):
                 rec.doc_state_summary = False
             else:
                 inc = doc_incident[0]
-                label = state_labels.get(inc.doc_state, inc.doc_state or 'Unknown')
+                label = state_labels.get(inc.doc_id.state, inc.doc_id.state or 'Unknown')
                 rec.doc_warning = 'ok'
                 rec.doc_state_summary = f"{inc.name} — {label}"
 

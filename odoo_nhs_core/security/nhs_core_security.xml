@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- ══════════════════════════════════════════════════════════════
+             Module Category & Privilege
+        ══════════════════════════════════════════════════════════════════ -->
+        <record id="module_category_nhs_core" model="ir.module.category">
+            <field name="name">NHS Backoffice</field>
+            <field name="description">Suite-wide access for the NHS Backoffice modules.</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="privilege_nhs_core_access_level" model="res.groups.privilege">
+            <field name="name">NHS Backoffice Access Level</field>
+            <field name="category_id" ref="module_category_nhs_core"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             Umbrella group — implies the top group of every NHS module
+        ══════════════════════════════════════════════════════════════════ -->
+        <record id="group_nhs_backoffice_admin" model="res.groups">
+            <field name="name">NHS Backoffice Administrator</field>
+            <field name="privilege_id" ref="privilege_nhs_core_access_level"/>
+            <field name="implied_ids" eval="[
+                (4, ref('odoo_nhs_trust_management.group_nhs_trust_admin')),
+                (4, ref('odoo_nhs_ods_sync.group_nhs_ods_sync_operator')),
+                (4, ref('odoo_nhs_governance.group_nhs_gov_manager')),
+                (4, ref('odoo_nhs_incident_risk.group_hc_quality_lead')),
+                (4, ref('odoo_nhs_incident_risk.group_hc_safeguarding')),
+                (4, ref('odoo_nhs_complaints.group_nhs_complaint_quality_lead')),
+                (4, ref('odoo_nhs_dspt.group_nhs_dspt_manager')),
+                (4, ref('odoo_nhs_establishment.group_nhs_workforce_manager')),
+                (4, ref('odoo_nhs_recruitment.group_nhs_recruit_manager')),
+                (4, ref('odoo_nhs_training.group_nhs_training_manager')),
+                (4, ref('odoo_nhs_estate.group_nhs_estate_manager')),
+            ]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="comment">Full management access across the whole NHS Backoffice
+                suite: grants the highest access level of every NHS module in one step.</field>
+        </record>
+    </data>
+</odoo>

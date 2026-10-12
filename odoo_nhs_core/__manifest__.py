@@ -37,25 +37,7 @@ grants full management access across the whole suite.
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.cybrosys.com',
     'license': 'LGPL-3',
-    'depends': [
-        # Trust & organisation
-        'odoo_nhs_trust_management',
-        'odoo_nhs_trust_operations',
-        'odoo_nhs_trust_reports',
-        'odoo_nhs_ods_sync',
-        'odoo_nhs_uk_regions',
-        # Governance & clinical quality
-        'odoo_nhs_governance',
-        'odoo_nhs_incident_risk',
-        'odoo_nhs_complaints',
-        'odoo_nhs_dspt',
-        # Workforce
-        'odoo_nhs_establishment',
-        'odoo_nhs_recruitment',
-        'odoo_nhs_training',
-        # Estates & facilities
-        'odoo_nhs_estate',
-    ],
+    'depends': ['base'],
     'data': [
         'security/nhs_core_security.xml',
     ],
